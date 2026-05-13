@@ -30,27 +30,27 @@ Este arquivo fornece contexto normativo, legal e operacional para agentes de IA 
 
 ## Municípios Monitorados — 13ª SJ Franca/SP
 
-17 municípios do interior paulista. Consultar tabela `municipios_franca` no banco `radar_ep.duckdb`:
+17 municípios do interior paulista. Fonte autoritativa: tabela `municipios_franca` no banco `radar_ep.duckdb` (criada por `scripts/setup_db.py`).
 
 | Município | IBGE | Porte | Pop. |
 |-----------|------|-------|------|
 | Franca | 3516200 | G | 365.494 |
-| São Joaquim da Barra | 3548005 | M | 49.885 |
-| Ituverava | 3525706 | M | 38.413 |
-| Igarapava | 3522901 | M | 26.696 |
-| Guará | 3522000 | P | 18.748 |
-| Ipuã | 3523008 | P | 15.900 |
-| Pedregulho | 3543600 | P | 15.600 |
-| Patrocínio Paulista | 3536703 | P | 14.529 |
-| São José da Bela Vista | 3548104 | P | 8.895 |
-| Cristais Paulista | 3521309 | P | 8.200 |
-| Restinga | 3543907 | P | 7.504 |
-| Itirapuã | 3524105 | P | 6.453 |
+| São Joaquim da Barra | 3549409 | M | 49.885 |
+| Ituverava | 3524105 | M | 38.413 |
+| Igarapava | 3520103 | M | 26.696 |
+| Guará | 3517703 | P | 18.748 |
+| Ipuã | 3521309 | P | 15.900 |
+| Pedregulho | 3537008 | P | 15.600 |
+| Patrocínio Paulista | 3536307 | P | 14.529 |
+| São José da Bela Vista | 3549508 | P | 8.895 |
+| Cristais Paulista | 3513207 | P | 8.200 |
+| Restinga | 3542701 | P | 7.504 |
+| Itirapuã | 3523701 | P | 6.453 |
 | Aramina | 3503000 | P | 5.535 |
-| Ribeirão Corrente | 3544004 | P | 4.682 |
-| Buritizal | 3519006 | P | 4.458 |
-| Rifaina | 3544608 | P | 4.179 |
-| Jeriquara | 3530508 | P | 4.000 |
+| Ribeirão Corrente | 3543105 | P | 4.682 |
+| Buritizal | 3508207 | P | 4.458 |
+| Rifaina | 3543600 | P | 4.179 |
+| Jeriquara | 3525409 | P | 4.000 |
 
 ---
 
@@ -117,8 +117,14 @@ TOTAL              : 1.00
 ## Schema do Banco DuckDB (radar_ep.duckdb)
 
 ```sql
--- Emendas parlamentares (CSV local + BigQuery)
-emendas_parlamentares  -- 92.756+ linhas
+-- Emendas parlamentares (CSV local + BigQuery br_cgu_emendas_parlamentares.microdados)
+-- Colunas principais (BigQuery): ano_emenda, id_emenda, numero_emenda, tipo_emenda,
+--   id_autor_emenda, nome_autor_emenda, localidade, sigla_uf_gasto, id_municipio_gasto,
+--   id_funcao, nome_funcao, id_subfuncao, nome_subfuncao, id_programa, nome_programa,
+--   id_acao, nome_acao, id_plano_orcamentario, nome_plano_orcamentario,
+--   valor_empenhado, valor_liquidado, valor_pago,
+--   valor_resto_pagar_inscrito, valor_resto_pagar_cancelado, valor_resto_pagar_pagos
+emendas_parlamentares  -- 92.756+ linhas (CGU, cobertura 2013-2026)
 
 -- Convênios firmados
 convenios              -- 81.977 linhas
@@ -126,11 +132,24 @@ convenios              -- 81.977 linhas
 -- Pagamentos por favorecido (empresa/pessoa)
 por_favorecido         -- 772.371 linhas
 
--- Municípios monitorados
+-- Municípios monitorados (17 municípios — fonte autoritativa de IBGEs)
 municipios_franca      -- 17 linhas
+
+-- Cache de consultas CNPJ (BrasilAPI) — evita chamadas repetidas
+cnpj_cache             -- dinâmico
+
+-- Sanções CEIS/CNEP (CSV mensal CGU)
+sancoes_ceis           -- dinâmico
 
 -- Alertas gerados pelo motor de risco
 alertas                -- dinâmico
+```
+
+### Views normalizadas
+```sql
+-- Valores monetários convertidos de formato BR ("10.000,00") para DOUBLE
+v_emendas_valores      -- SELECT * FROM emendas_parlamentares + colunas val_*
+v_favorecido_valores   -- SELECT * FROM por_favorecido + val_recebido, cnpj_limpo, ano_ref, mes_ref
 ```
 
 ---

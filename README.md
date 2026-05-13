@@ -174,21 +174,33 @@ python src/ingestao/bigquery_loader.py
 | Município | IBGE | Pop. | Porte |
 |-----------|------|------|-------|
 | Franca | 3516200 | 365.494 | Grande |
-| São Joaquim da Barra | 3548005 | 49.885 | Médio |
-| Ituverava | 3525706 | 38.413 | Médio |
-| Igarapava | 3522901 | 26.696 | Médio |
-| *(+ 13 municípios pequenos)* | | | |
+| São Joaquim da Barra | 3549409 | 49.885 | Médio |
+| Ituverava | 3524105 | 38.413 | Médio |
+| Igarapava | 3520103 | 26.696 | Médio |
+| Guará | 3517703 | 18.748 | Pequeno |
+| Ipuã | 3521309 | 15.900 | Pequeno |
+| Pedregulho | 3537008 | 15.600 | Pequeno |
+| Patrocínio Paulista | 3536307 | 14.529 | Pequeno |
+| São José da Bela Vista | 3549508 | 8.895 | Pequeno |
+| Cristais Paulista | 3513207 | 8.200 | Pequeno |
+| Restinga | 3542701 | 7.504 | Pequeno |
+| Itirapuã | 3523701 | 6.453 | Pequeno |
+| Aramina | 3503000 | 5.535 | Pequeno |
+| Ribeirão Corrente | 3543105 | 4.682 | Pequeno |
+| Buritizal | 3508207 | 4.458 | Pequeno |
+| Rifaina | 3543600 | 4.179 | Pequeno |
+| Jeriquara | 3525409 | 4.000 | Pequeno |
 
 ---
 
 ## 🔗 APIs Integradas
 
-| API | Uso | Auth |
-|-----|-----|------|
-| Base dos Dados (BigQuery) | Histórico 2013-2026 | OAuth Google |
-| Portal da Transparência | Execução em tempo real | Header `chave-api-dados` |
-| Transferegov.br | Planos de trabalho e PC | Pública |
-| BrasilAPI | Dados cadastrais CNPJ | Pública |
+| API | Tabela/Endpoint | Auth |
+|-----|-----------------|------|
+| Base dos Dados (BigQuery) | `basedosdados.br_cgu_emendas_parlamentares.microdados` — histórico 2013-2026 | OAuth Google (`pip install basedosdados`) |
+| Portal da Transparência | `/emendas`, `/emendas/{codigo}` — execução em tempo real | Header `chave-api-dados` |
+| Transferegov.br | `/transferenciasespeciais/plano_acao_especial`, `/executor_especial` | Pública (PostgREST) |
+| BrasilAPI | `/api/cnpj/v1/{cnpj}` — dados cadastrais | Pública |
 
 ---
 

@@ -10,3 +10,4 @@ tenacity
 anthropic
 scikit-learn
 google-genai
+basedosdados

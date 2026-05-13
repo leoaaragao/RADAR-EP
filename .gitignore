@@ -1,10 +1,33 @@
+# Credenciais — NUNCA versionar
 .env
+
+# Banco de dados local (gerado por scripts/setup_db.py)
+*.duckdb
+
+# Dados brutos — arquivos grandes, não versionados
+*.csv
+*.gz
+
+# Python
 __pycache__/
 *.pyc
-*.csv
-data/*.csv
-test_query.py
-test_pix.py
-.streamlit/
+*.pyo
+*.pyd
+.Python
+
+# IDEs
 .idea/
 .vscode/
+*.code-workspace
+
+# Streamlit
+.streamlit/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Windows Explorer metadata
+desktop.ini
+Thumbs.db
