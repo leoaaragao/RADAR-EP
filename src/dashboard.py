@@ -26,7 +26,7 @@ import pandas as pd
 import plotly.express as px
 import streamlit as st
 from dotenv import load_dotenv
-from streamlit_folium import folium_static
+from streamlit_folium import st_folium
 
 load_dotenv()
 logging.basicConfig(level=logging.INFO)
@@ -408,7 +408,7 @@ with tab1:
                 tooltip=f"{row['nome']} | Escore: {escore:.2f}",
             ).add_to(m)
 
-    folium_static(m, width=None, height=480)
+    st_folium(m, width="100%", height=480, returned_objects=[])
 
     # Legenda
     col_l1, col_l2, col_l3, _ = st.columns([1, 1, 1, 3])
