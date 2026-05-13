@@ -124,7 +124,7 @@ def _gemini_request(prompt: str, max_tokens: int = 400) -> str:
         from google.genai import types
 
         client = genai.Client(api_key=os.getenv("GOOGLE_API_KEY"))
-        model = os.getenv("GEMINI_MODEL", "gemini-1.5-flash")
+        model = os.getenv("GEMINI_MODEL", "gemini-2.0-flash")
 
         response = client.models.generate_content(
             model=model,
