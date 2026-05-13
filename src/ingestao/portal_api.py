@@ -17,7 +17,7 @@ logger = logging.getLogger(__name__)
 
 BASE_URL = "https://api.portaldatransparencia.gov.br/api-de-dados"
 RATE_LIMIT_POR_MIN = 90   # Das 6h às 23h59
-MAX_POR_PAGINA = 200
+MAX_POR_PAGINA = 15  # O padrão da API do Portal é 15 por página
 
 
 def _get_headers(chave_api: Optional[str] = None) -> dict:

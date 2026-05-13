@@ -553,8 +553,13 @@ with tab3:
     
     with col_g3:
         # Top parlamentares (Filtrado por 13 SJ)
+        colunas_db = safe_query("SELECT column_name FROM information_schema.columns WHERE table_name = 'emendas_parlamentares'")
+        tem_partido = not colunas_db.empty and "Partido do Autor" in colunas_db["column_name"].values
+        
+        partido_str = " || ' (' || COALESCE(\"Partido do Autor\", '') || ')'" if tem_partido else ""
+        
         df_parl = safe_query(f"""
-            SELECT "Nome do Autor da Emenda" as parlamentar,
+            SELECT ("Nome do Autor da Emenda"{partido_str}) as parlamentar,
                    COUNT(*) as n_emendas,
                    SUM("Valor Empenhado") as total
             FROM emendas_parlamentares
