@@ -9,7 +9,16 @@ Iniciar com: streamlit run src/dashboard.py
 import os
 import json
 import logging
+import sys
 from pathlib import Path
+
+# Configuração de caminhos para o Streamlit Cloud encontrar os módulos na pasta src
+current_dir = Path(__file__).resolve().parent
+if str(current_dir) not in sys.path:
+    sys.path.insert(0, str(current_dir))
+root_dir = current_dir.parent
+if str(root_dir) not in sys.path:
+    sys.path.insert(0, str(root_dir))
 
 import duckdb
 import folium
@@ -614,7 +623,10 @@ with tab4:
         "retorna uma narrativa analítica."
     )
 
-    from src.ai_provider import prover_disponivel, gerar_sql, gerar_narrativa
+    try:
+        from ai_provider import prover_disponivel, gerar_sql, gerar_narrativa
+    except ImportError:
+        from src.ai_provider import prover_disponivel, gerar_sql, gerar_narrativa
     ai_status = prover_disponivel()
     
     if not ai_status["ativo"]:

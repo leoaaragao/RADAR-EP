@@ -7,3 +7,6 @@ plotly
 python-dotenv
 httpx
 tenacity
+anthropic
+scikit-learn
+google-generativeai
