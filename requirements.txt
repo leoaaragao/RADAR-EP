@@ -9,4 +9,4 @@ httpx
 tenacity
 anthropic
 scikit-learn
-google-generativeai
+google-genai
