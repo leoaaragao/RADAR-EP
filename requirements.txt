@@ -1,36 +1,9 @@
-# RADAR-EP — Dependências Python
-# Projeto Piloto — 13ª SJ MPF Franca/SP | Maio/2026
-
-# ── Dados & Banco ──────────────────────────────────────────────
-basedosdados==0.9.0
-pandas==2.2.3
-duckdb==1.1.3
-
-# ── HTTP & APIs ────────────────────────────────────────────────
-httpx==0.27.2
-tenacity==9.0.0
-
-# ── Ambiente ───────────────────────────────────────────────────
-python-dotenv==1.0.1
-
-# ── Machine Learning & NLP ─────────────────────────────────────
-scikit-learn==1.5.2
-sentence-transformers==3.2.1
-
-# ── Visualização & Dashboard ───────────────────────────────────
-folium==0.18.0
-streamlit-folium==0.22.0
-plotly==5.24.1
-streamlit==1.39.0
-
-# ── API Backend ────────────────────────────────────────────────
-fastapi==0.115.0
-uvicorn==0.32.0
-
-# ── IA Generativa ──────────────────────────────────────────────
-anthropic==0.40.0
-
-# ── Testes ─────────────────────────────────────────────────────
-pytest==8.3.3
-pytest-asyncio==0.24.0
-httpx  # já declarado acima (TestClient FastAPI)
+streamlit
+pandas
+duckdb
+folium
+streamlit-folium
+plotly
+python-dotenv
+httpx
+tenacity
